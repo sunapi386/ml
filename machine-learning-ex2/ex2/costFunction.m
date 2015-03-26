@@ -26,9 +26,8 @@ grad = zeros(size(theta));
 %            -(1-y)log(1-h_theta(x_i))
 J_costs = zeros(m, 1); % m elements
 for i=1:m
-    z = X(i,:)*theta; % theta x
-    h_theta = sigmoid(z); % g(z) (sigmoid)
-    J_costs(i) = -y(i)*log(sigmoid(z)) - (1-y(i))*log(1-h_theta); 
+    h_theta = sigmoid(X(i,:)*theta); % g(z) (sigmoid)
+    J_costs(i) = (-y(i)*log(h_theta)) - (1-y(i))*log(1-h_theta); 
 end
 J = (1/m) * sum(J_costs);
 
