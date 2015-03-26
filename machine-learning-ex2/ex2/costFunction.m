@@ -26,17 +26,22 @@ grad = zeros(size(theta));
 %            -(1-y)log(1-h_theta(x_i))
 J_costs = zeros(m, 1); % m elements
 for i=1:m
-    z = (X(i,:)*theta); % theta x
-    h_theta = 1/(1 + exp(-z)); % g(z) (sigmoid)
-    J_costs(i) = -y(i)*log(h_theta) - (1-y(i))*log(1-h_theta); 
+    z = X(i,:)*theta; % theta x
+    h_theta = sigmoid(z); % g(z) (sigmoid)
+    J_costs(i) = -y(i)*log(sigmoid(z)) - (1-y(i))*log(1-h_theta); 
 end
 J = (1/m) * sum(J_costs);
 
 % gradient of cost vector
-grad_costs = zeros(m, 1);
 for j=1:n
-    grad_costs(j) = (h_theta - y(j))*x_i_j;
-    grad(j) = (1/m) * sum;
+    % for each j-th term of theta
+    sum_term = 0;
+    for i=1:m
+        z = X(i,:)*theta;
+        h_theta = sigmoid(z); % g(z) (sigmoid)
+        sum_term = sum_term + (h_theta - y(i)) * X(i,j);
+    end
+    grad(j) = (1/m) * sum_term;
 end
 
 
