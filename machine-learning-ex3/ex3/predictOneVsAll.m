@@ -30,9 +30,10 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
+% Compute example with each theta's prob
+prob_cols = X * all_theta';
+[M,I] = max(prob_cols, [], 2);
+p = I;
 
 % =========================================================================
 
